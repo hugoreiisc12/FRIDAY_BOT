@@ -1,0 +1,7 @@
+opencv-python
+numpy
+Pillow
+pyobjc-framework-Quartz
+selenium
+webdriver-manager
+pytest

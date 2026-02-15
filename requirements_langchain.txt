@@ -1,0 +1,9 @@
+langchain>=0.0.271
+openai>=0.27.0
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+pinecone-client>=2.2.0
+transformers>=4.35.0
+fastapi>=0.95.0
+uvicorn>=0.22.0
+python-telegram-bot>=20.0

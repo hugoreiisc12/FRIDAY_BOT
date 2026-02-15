@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  bot:
+    build: ..
+    volumes:
+      - ..:/app
+    environment:
+      - DEBUG=true
+    command: python main.py
