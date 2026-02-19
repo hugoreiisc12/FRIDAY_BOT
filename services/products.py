@@ -1,5 +1,8 @@
 from connectors.mercado_livre import MercadoLivreConnector
 from connectors.amazon import AmazonConnector
+from connectors.magazine_luiza import MagazineLuizaConnector
+from connectors.shopee import ShopeeConnector
+from connectors.casas_bahia import CasasBahiaConnector
 from services.normalization_service import normalize_products
 from services.validation_service import validate_products
 from ai.decision_engine import analyze_products
@@ -10,7 +13,7 @@ def get_products(query: str):
 
     Fluxo:
     - Validação simples da query (retorna vazio para queries curtas/vazias)
-    - Tenta múltiplos conectores (MercadoLivre, Amazon...)
+    - Tenta múltiplos conectores (MercadoLivre, Amazon, MagazineLuiza, Shopee, Casas Bahia)
     - Em caso de erro em qualquer conector, registra e continua
     - Normaliza e valida resultados
     - Chama engine de decisão para análise/score
@@ -25,6 +28,9 @@ def get_products(query: str):
     connectors = [
         MercadoLivreConnector(),
         AmazonConnector(),
+        MagazineLuizaConnector(),
+        ShopeeConnector(),
+        CasasBahiaConnector(),
     ]
 
     raw_products = []

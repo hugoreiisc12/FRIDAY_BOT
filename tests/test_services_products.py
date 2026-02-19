@@ -1,3 +1,10 @@
+import os
+import sys
+# ensure project root is importable when tests run in different contexts
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from services.products import get_products
 
 
@@ -11,6 +18,11 @@ def test_orchestrator_returns_structure():
     if out["results"]:
         p = out["results"][0]
         assert all(k in p for k in ("nome", "preco", "loja", "url", "specs"))
+
+    # ensure connectors contributed products (MercadoLivre, Amazon, MagazineLuiza, Shopee, Casas Bahia)
+    lojas = {p['loja'] for p in out['results']}
+    expected = {"MercadoLivre", "Amazon", "MagazineLuiza", "Shopee", "Casas Bahia"}
+    assert expected.issubset(lojas)
 
 
 def test_orchestrator_handles_empty():
