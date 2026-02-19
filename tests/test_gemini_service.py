@@ -1,6 +1,6 @@
 import requests
 import pytest
-from core.services_gemini import GeminiService
+from ai.providers.gemini_service import GeminiService
 
 
 class DummyResp:

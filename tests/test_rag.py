@@ -1,6 +1,6 @@
 from ai.rag import RAGProductChain
 from ai.vector_db import EmbeddingService, FAISSVectorDB, VectorDBManager
-from core.services_langchain import OpenAILangChainService
+from ai.providers.langchain_service import OpenAILangChainService
 
 
 class DummyLLM:

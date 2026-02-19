@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-from core.services_langchain import OpenAILangChainService
+from ai.providers.langchain_service import OpenAILangChainService
 from ai.vector_db import VectorDBManager, EmbeddingService
 
 

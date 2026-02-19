@@ -1,5 +1,5 @@
 import pytest
-from core.services_hf import HuggingFaceService
+from ai.providers.hf_service import HuggingFaceService
 
 
 class DummyResp:

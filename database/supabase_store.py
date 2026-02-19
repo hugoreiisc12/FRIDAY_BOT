@@ -66,3 +66,4 @@ class SupabaseConversationStore:
     def get_messages(self, session_id: str) -> List[Dict[str, Any]]:
         res = self.client.table("messages").select("*").eq("session_id", session_id).order("created_at", desc=False).execute()
         return getattr(res, "data", [])
+

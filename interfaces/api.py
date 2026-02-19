@@ -120,3 +120,11 @@ def get_history(user_id: str):
             raise HTTPException(status_code=500, detail=str(e))
 
     raise HTTPException(status_code=404, detail='no stored history available')
+
+
+# Products router (connectors layer)
+try:
+    from interfaces.products import router as products_router
+    app.include_router(products_router)
+except Exception as e:
+    print(f"⚠️ Não foi possível incluir router de produtos: {e}")

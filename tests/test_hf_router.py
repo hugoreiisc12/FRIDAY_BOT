@@ -1,4 +1,4 @@
-from core.services_hf_router import HuggingFaceRouterService
+from ai.providers.hf_router_service import HuggingFaceRouterService
 
 
 class DummyResp:

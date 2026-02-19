@@ -1,6 +1,6 @@
 import types
 import pytest
-from core.supabase_store import SupabaseConversationStore
+from database.supabase_store import SupabaseConversationStore
 
 
 class DummyRes:
@@ -59,7 +59,7 @@ def test_create_session_and_save_message_monkeypatch(monkeypatch):
     fake_client = FakeClient()
 
     # monkeypatch create_client to return our fake client
-    monkeypatch.setattr('core.supabase_store.create_client', lambda url, key: fake_client)
+    monkeypatch.setattr('database.supabase_store.create_client', lambda url, key: fake_client)
 
     store = SupabaseConversationStore(url='url', key='key')
     ctx = DummyCtx()

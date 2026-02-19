@@ -1,5 +1,5 @@
 from interfaces import api as api_module
-from core.supabase_store import SupabaseConversationStore
+from database.supabase_store import SupabaseConversationStore
 import os, time
 
 CM = api_module.CM
