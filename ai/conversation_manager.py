@@ -12,7 +12,7 @@ from datetime import datetime
 import os
 import re
 
-# Optional langchain message types (kept locally)
+# Tipos de mensagens langchain opcionais (mantidos localmente)
 try:
     from langchain.schema import SystemMessage, HumanMessage
     LANGCHAIN_MESSAGES_AVAILABLE = True
@@ -29,7 +29,7 @@ except Exception:
 
 
 # ============================================================================
-# STATES & MODES
+# STATUS E MODOS
 # ============================================================================
 class EstadoBot(Enum):
     INICIAL = "inicial"

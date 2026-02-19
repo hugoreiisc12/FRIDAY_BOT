@@ -43,11 +43,3 @@ Rápido: executar localmente
 
 ---
 
-## Nova arquitetura (scaffold)
-
-Este workspace foi atualizado com um scaffold da arquitetura "Sexta Feira Bot" (core, ai, database, interfaces, payments, utils, scripts, tests, docs).
-- Veja `docs/ARQUITETURA_COMPLETA.md` para o diagrama e instruções iniciais.
-- **LangChain & RAG:** há um scaffold para RAG (`ai/rag.py`) e vector DB (`ai/vector_db.py`). Instale `requirements_langchain.txt` para ativar integrações reais.
-- Execute `python scripts/run_tests.py` para rodar os testes iniciais (`pytest`).
-
-Se preferir que eu reestruture mais arquivos ou implemente funcionalidades específicas, diga qual módulo devo priorizar.

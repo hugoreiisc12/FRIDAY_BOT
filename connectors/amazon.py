@@ -1,12 +1,29 @@
-from typing import List, Dict
+import requests
+from connectors.base import StoreConnector
 
+class AmazonConnector(StoreConnector):
 
-class AmazonConnector:
-    """Stub connector for Amazon (mock behaviour)."""
+    BASE_URL = "https://www.amazon.com.br"
 
-    def search(self, query: str, limit: int = 5) -> List[Dict]:
-        base = [
-            {"product_title": f"{query.title()} Amazon Pro", "currency_price": "$2,699.99", "merchant": "Amazon", "product_url": "https://amazon/item/1", "description": "16GB RAM, SSD 512GB"},
-            {"product_title": f"{query.title()} Amazon Lite", "currency_price": "$1,499.00", "merchant": "Amazon", "product_url": "https://amazon/item/2", "description": "8GB RAM, HD 1TB"},
-        ]
-        return base[:limit]
+    def search(self, query: str):
+        response = requests.get(
+            self.BASE_URL,
+            params={"q": query},
+            timeout=5
+        )
+
+        data = response.json()
+
+        products = []
+        for item in data["results"]:
+            products.append({
+                "store": "Amazon",
+                "product_name": item["tittle"],
+                "price": item["price"],
+                "currency": item["currency_id"],
+                "in_stock": item["available_quantiy"] > 0,
+                "shopping_link": None,
+                "product_url": item["permalink"]
+            })
+        
+        return products

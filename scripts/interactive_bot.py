@@ -26,7 +26,7 @@ def run():
                 ctx = cm.obter_contexto(uid)
                 carrinho = ctx.carrinho if ctx else []
                 if not carrinho:
-                    print("Bot: Seu carrinho está vazio.")
+                     print("Bot: Seu carrinho está vazio.")
                 else:
                     print("Bot: Itens no carrinho:")
                     for i, p in enumerate(carrinho, start=1):
