@@ -8,7 +8,15 @@ if PROJECT_ROOT not in sys.path:
 from services.products import get_products
 
 
+import os
+
 def test_orchestrator_returns_structure():
+    # provide dummy tokens so connectors requiring keys don't raise
+    os.environ.setdefault("AMAZON_API_KEY", "dummy")
+    os.environ.setdefault("MERCADO_LIVRE_API_KEY", "dummy")
+    os.environ.setdefault("SHOPEE_API_KEY", "dummy")
+    os.environ.setdefault("CASAS_BAHIA_API_KEY", "dummy")
+    os.environ.setdefault("MAGAZINE_LUIZA_API_KEY", "dummy")
     out = get_products("notebook")
     assert isinstance(out, dict)
     assert out["query"] == "notebook"
