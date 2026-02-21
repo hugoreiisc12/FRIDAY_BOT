@@ -17,6 +17,26 @@ def test_orchestrator_returns_structure():
     os.environ.setdefault("SHOPEE_API_KEY", "dummy")
     os.environ.setdefault("CASAS_BAHIA_API_KEY", "dummy")
     os.environ.setdefault("MAGAZINE_LUIZA_API_KEY", "dummy")
+    # replace connector methods with simple mocks to avoid external calls
+    from connectors.mercado_livre import MercadoLivreConnector
+    from connectors.amazon import AmazonConnector
+    from connectors.magazine_luiza import MagazineLuizaConnector
+    from connectors.shopee import ShopeeConnector
+    from connectors.casas_bahia import CasasBahiaConnector
+
+    for cls, store in [
+        (MercadoLivreConnector, "MercadoLivre"),
+        (AmazonConnector, "Amazon"),
+        (MagazineLuizaConnector, "MagazineLuiza"),
+        (ShopeeConnector, "Shopee"),
+        (CasasBahiaConnector, "Casas Bahia"),
+    ]:
+        def make_search(store_name):
+            def _s(self, q, limit=5):
+                return [{"nome": f"{q} {store_name}", "preco": 123, "loja": store_name, "url": "", "specs": ""}]
+            return _s
+        cls.search = make_search(store)
+
     out = get_products("notebook")
     assert isinstance(out, dict)
     assert out["query"] == "notebook"
