@@ -1,12 +1,30 @@
-from typing import List, Dict
+import requests
+from connectors.base import StoreConnector
 
 
-class CasasBahiaConnector:
-    """Stub connector for Casas Bahia (mock behaviour)."""
+class CasasBahiaConnector(StoreConnector):
+    token_env = "CASAS_BAHIA_API_KEY"
+    BASE_URL= "https://www.casasbahia.com.br/api/v1/search"
 
-    def search(self, query: str, limit: int = 5) -> List[Dict]:
-        base = [
-            {"title": f"{query.title()} Casas Bahia Prime", "price": "R$ 2.399,00", "source": "Casas Bahia", "link": "https://casasbahia/item/1", "snippet": "16GB RAM, SSD 512GB"},
-            {"title": f"{query.title()} Casas Bahia Simples", "price": "R$ 1.199,00", "source": "Casas Bahia", "link": "https://casasbahia/item/2", "snippet": "4GB RAM, HD 1TB"},
-        ]
-        return base[:limit]
+    def search(self, query: str, limit: int = 5):
+        if self.api_key:
+            pass
+        response = requests.get(
+            self.BASE_URL,
+            params={"q": query},
+            timeout=5,
+        )
+
+        data = response.json()
+        products = []
+        for item in data.get("results", [])[:limit]:
+            products.append({
+                "store": "Casas Bahia",
+                "product_name": item.get("title") or item.get("tittle"),
+                "price": item.get("price"),
+                "currency": item.get("currency_id"),
+                "in_stock": item.get("available_quantity", 0) > 0,
+                "shopping_link": None,
+                "product_url": item.get("permalink"),
+            })
+        return products
